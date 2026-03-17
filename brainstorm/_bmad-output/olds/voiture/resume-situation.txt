@@ -1,0 +1,188 @@
+# Situation Voiture - Peugeot 208
+
+**Date:** 2 février 2026
+
+---
+
+## La Voiture
+
+| Information | Valeur |
+|-------------|--------|
+| Marque/Modèle | Peugeot 208 |
+| Année | 2015 |
+| Kilométrage | 125 715 km |
+| Motorisation | Essence PureTech |
+| Contrôle technique | Passé le 19/12/2025 |
+| Prix d'achat | 2 900€ |
+
+---
+
+## La Situation Financière
+
+```
+VENDEUSE (Paris)
+    │
+    ├── Reçu 1 600€ du cousin (virement officiel)
+    │
+    └── Reçu 1 300€ de Humain (avance secrète pour débloquer la situation)
+
+HUMAIN (Paris)
+    │
+    └── A avancé 1 300€ → Le cousin refuse de rembourser
+
+COUSIN DE LA COPINE (Poitiers)
+    │
+    ├── Possède la voiture
+    ├── A payé 1 600€
+    ├── A annulé son virement de 1 300€ APRÈS avoir récupéré la voiture
+    └── Refuse de payer en utilisant l'excuse "la voiture est une arnaque"
+```
+
+**Problème principal:** Humain a 1 300€ dans la nature que le cousin refuse de rembourser.
+
+---
+
+## Le Devis du Garagiste (4 073,20€ TTC)
+
+### Détail des postes:
+
+| Poste | Prix TTC |
+|-------|----------|
+| Boîte de vitesses | 439,50€ |
+| Kit embrayage 3 pièces | 343,06€ |
+| Huile Tranmax (x2) | 48,00€ |
+| Dépose/repose boîte | 265,00€ |
+| Kit distribution PureTech | 252,46€ |
+| Dépose/repose distribution | 140,00€ |
+| Huile moteur | 39,50€ |
+| Filtre à huile | 9,78€ |
+| Kit courroie entraînement | 97,28€ |
+| Silencieux arrière (occasion) | 85,00€ |
+| Dépose/repose silencieux | 20,00€ |
+| Pare-boue AVG (x2) | 229,06€ |
+| Bras suspension AVG + pose | 248,91€ |
+| Rotules direction AVG (x2) | 195,59€ |
+| Silent blocs barre stab | 47,00€ |
+| Pneus Kleber (x4) | 178,00€ |
+| Géométrie avant | 75,00€ |
+| Catalyseur (pièce + MO) | ~562,00€ |
+| **TOTAL TTC** | **4 073,20€** |
+
+---
+
+## Analyse du Devis
+
+### Ce qui est DOUTEUX:
+
+| Élément | Raison |
+|---------|--------|
+| **Boîte de vitesses (~750€)** | Aucun code erreur au diagnostic. Le bruit au volant n'est PAS un symptôme de boîte de vitesses. |
+| Kit embrayage (~343€) | Pas de symptôme décrit (patinage, difficulté passage vitesses) |
+
+### Ce qui est PROBABLEMENT JUSTIFIÉ:
+
+| Élément | Raison |
+|---------|--------|
+| Bras de suspension + rotules (~445€) | Cause probable du bruit quand on tourne le volant |
+| Géométrie (75€) | Nécessaire après travaux suspension |
+| Silent blocs (47€) | Usure normale à ce kilométrage |
+
+### Ce qui est CONFIRMÉ mais PAS URGENT:
+
+| Élément | Raison |
+|---------|--------|
+| Catalyseur (~562€) | Le diagnostic valise confirme "perte d'efficacité" mais la voiture roule |
+
+---
+
+## Diagnostic Valise (fait par un ami)
+
+- Défaut signal détection sous-gonflage pneus
+- Défaut haut-parleurs droit et gauche
+- Défaut accessoires/relais positif non cohérent
+- Défaut commande feu stop gauche
+- Défaut éclairage plaque immatriculation
+- Code LINFault21
+- **Convertisseur catalytique : perte d'efficacité** (explique le voyant moteur orange)
+- Sécurité basse pression climatisation
+
+**Note:** Aucun code erreur boîte de vitesses!
+
+---
+
+## Étude de Marché
+
+### Prix constatés sur Le Bon Coin (Peugeot 208, 2015, ~125k km, Essence):
+
+| Prix | Kilométrage | Vendeur |
+|------|-------------|---------|
+| 4 800€ | 125 000 km | Particulier |
+| 5 500€ | 117 000 km | Particulier |
+| 6 990€ | 119 850 km | Professionnel |
+| 6 990€ | 121 300 km | Professionnel |
+
+### Estimation de la valeur:
+
+| État | Prix estimé |
+|------|-------------|
+| En l'état actuel (voyant + bruit) | 3 500€ - 4 500€ |
+| Après réparations suspension | 4 500€ - 5 500€ |
+| Bon état général | 5 000€ - 7 000€ |
+
+**Conclusion:** Le prix d'achat de 2 900€ était CORRECT, voire avantageux.
+
+---
+
+## Options pour Récupérer les 1 300€
+
+### Option 1: Voie familiale (RECOMMANDÉE)
+- La copine intervient auprès de son cousin
+- Pression familiale pour obtenir le remboursement
+- **Avantage:** Pas de frais, peut être efficace
+
+### Option 2: Rachat de la voiture
+- Proposer de payer 1 600€ de plus pour récupérer la voiture
+- Coût total: 2 900€
+- Revente possible: 4 500€ - 5 500€
+- **Risque:** Voiture à Poitiers, impossible de vérifier par un autre garagiste
+
+### Option 3: Accepter la perte (dernier recours)
+- Considérer les 1 300€ comme une leçon de vie
+- Couper les ponts
+
+---
+
+## Calcul Option Rachat
+
+| Scénario | Optimiste | Réaliste | Pessimiste |
+|----------|-----------|----------|------------|
+| Déjà payé | 1 300€ | 1 300€ | 1 300€ |
+| Rachat | 1 600€ | 1 600€ | 1 600€ |
+| **Acquisition** | **2 900€** | **2 900€** | **2 900€** |
+| Réparations | 800€ | 1 500€ | 2 500€ |
+| **Total investi** | **3 700€** | **4 400€** | **5 400€** |
+| Revente | 5 500€ | 4 800€ | 4 500€ |
+| **Résultat** | **+1 800€** | **+400€** | **-900€** |
+
+---
+
+## Conclusions
+
+1. **La voiture n'est PAS une arnaque.** Le prix de 2 900€ est correct pour ce véhicule.
+
+2. **Le devis du garagiste est probablement gonflé.** Le remplacement de la boîte de vitesses n'est pas justifié par les symptômes ni par le diagnostic.
+
+3. **Le cousin utilise ce devis comme excuse** pour ne pas payer ce qu'il doit.
+
+4. **Réparations réellement nécessaires:** ~800-1 500€ (suspension/direction + éventuellement catalyseur), PAS 4 000€.
+
+5. **Priorité:** Récupérer les 1 300€ via la copine avant d'envisager toute autre option.
+
+---
+
+## Sources
+
+- [Le Bon Coin - Peugeot 208 2015](https://www.leboncoin.fr/ck/voitures/peugeot-208-2015)
+- [AutoUncle - Cote Peugeot 208 2015](https://www.autouncle.fr/fr/voitures-occasion/Peugeot/208/y-2015)
+- [Autobiz - Cote Peugeot 208](https://coteauto.autobiz.fr/peugeot/peugeot-208-1.2-80-puretech-active-2015/cote-auto/)
+- [La Centrale - Argus 208 2015](https://www.lacentrale.fr/cote-voitures-peugeot-208--2015-.html)

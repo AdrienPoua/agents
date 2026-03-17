@@ -1,0 +1,82 @@
+name: ✨ Feature Request
+description: Proposer une nouvelle fonctionnalité
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+assignees:
+  - AdrienPoua
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de proposer une amélioration ! Décrivez votre idée en détail.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problème ou besoin
+      description: Quel problème cette fonctionnalité résoudrait-elle ?
+      placeholder: "En tant qu'utilisateur, je ne peux pas..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solution proposée
+      description: Comment imaginez-vous cette fonctionnalité ?
+      placeholder: "Je voudrais pouvoir..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives envisagées
+      description: Avez-vous pensé à d'autres solutions ?
+      placeholder: "Une autre approche pourrait être..."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorité
+      description: Quelle priorité donneriez-vous à cette fonctionnalité ?
+      options:
+        - 🔴 Haute (essentielle pour le projet)
+        - 🟠 Moyenne (importante mais pas urgente)
+        - 🟢 Basse (amélioration nice-to-have)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Catégorie
+      description: Quel domaine concerne cette fonctionnalité ?
+      options:
+        - 🏀 Équipes & Matchs
+        - 📝 Inscriptions
+        - 📰 Blog & Actualités
+        - 👥 Gestion Staff
+        - 🔐 Administration
+        - 🎨 UI/UX
+        - ⚡ Performance
+        - 📱 Mobile
+        - ♿ Accessibilité
+        - 🔧 Autre
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: willing-to-implement
+    attributes:
+      label: Contribution
+      description: Seriez-vous prêt à contribuer à cette fonctionnalité ?
+      options:
+        - label: Je serais prêt à soumettre une Pull Request pour cette fonctionnalité
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Informations complémentaires
+      description: Mockups, exemples, références, etc.

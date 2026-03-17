@@ -1,0 +1,111 @@
+name: ⚡ Performance Issue
+description: Signaler un problème de performance
+title: "[PERF] "
+labels: ["performance", "needs-triage"]
+assignees:
+  - AdrienPoua
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vous avez détecté un problème de performance ? Aidez-nous à l'identifier !
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type de problème
+      description: Quel type de ralentissement ?
+      options:
+        - 🐌 Temps de chargement lent
+        - 🔄 Rendu React lent
+        - 💾 Problème de mémoire
+        - 🗄️ Requête base de données lente
+        - 📦 Bundle size trop gros
+        - 🖼️ Images non optimisées
+        - 📡 Trop de requêtes réseau
+        - 🎨 Animation saccadée
+        - 📱 Problème spécifique mobile
+        - 🔧 Autre
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Décrivez le problème de performance
+      placeholder: "La page X met 5 secondes à charger..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Localisation
+      description: Où se produit le problème ?
+      placeholder: |
+        - URL: https://argenteuilbasketball.com/...
+        - Composant: `src/components/...`
+        - Fonction: `core/application/usecases/...`
+    validations:
+      required: true
+
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Métriques
+      description: Données mesurables (temps de chargement, Lighthouse scores, etc.)
+      placeholder: |
+        - Temps de chargement: 5.2s
+        - Lighthouse Performance: 45/100
+        - Bundle size: 2.5MB
+        - FCP: 3.1s
+        - LCP: 5.2s
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Appareil
+      description: Sur quel type d'appareil ?
+      options:
+        - Desktop (high-end)
+        - Desktop (low-end)
+        - Mobile (high-end)
+        - Mobile (low-end)
+        - Tablette
+        - Tous les appareils
+    validations:
+      required: true
+
+  - type: dropdown
+    id: network
+    attributes:
+      label: Connexion réseau
+      description: Type de connexion lors du problème
+      options:
+        - Fast 4G / 5G / Wifi
+        - Slow 3G / 4G
+        - Toutes connexions
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Captures d'écran / Profiling
+      description: Screenshots Lighthouse, Chrome DevTools Performance, Network tab, etc.
+      placeholder: Glissez-déposez vos images ici
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggestion d'optimisation
+      description: Si vous avez une idée pour améliorer les performances
+      placeholder: "On pourrait utiliser next/dynamic pour..."
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Informations complémentaires
+      description: Contexte additionnel

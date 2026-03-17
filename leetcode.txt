@@ -1,0 +1,34 @@
+LES FONDAMENTAUX UNIVERSELS 🧠
+1. COMPRENDRE LE PROBLÈME
+
+Reformuler avec tes mots + métaphore
+Identifier les entrées/sorties
+Tester sur 2-3 exemples
+
+2. IDENTIFIER LA STRUCTURE
+
+Cas de base : Quand s'arrêter ? (feuille, tableau vide, condition atteinte...)
+Récurrence : Que répéter ? Comment décomposer en sous-problèmes ?
+État/Variables : Quoi transmettre entre les appels ?
+
+3. PATTERNS DE BASE
+
+Parcours : visiter tous les éléments
+Recherche : trouver un élément spécifique  
+Accumulation : collecter/calculer des résultats
+Transformation : modifier la structure
+Validation : vérifier des conditions
+
+4. OUTILS DE BASE
+
+Récursion, boucles, conditions
+Tableaux, pointeurs, variables temporaires
+Structures de données (stack, queue...)
+
+5. MÉTHODE DE DEBUG
+
+Tracer à la main sur un petit exemple
+Vérifier les cas limites
+Se poser : "Est-ce que mon cas de base est bon ?"
+
+C'est tout ! Ces 5 points couvrent 90% des exercices ! 🎯

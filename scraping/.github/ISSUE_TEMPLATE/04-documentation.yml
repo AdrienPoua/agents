@@ -1,0 +1,79 @@
+name: 📚 Documentation
+description: Améliorer ou corriger la documentation
+title: "[DOCS] "
+labels: ["documentation"]
+assignees:
+  - AdrienPoua
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de contribuer à améliorer la documentation !
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type de modification
+      description: Quel type de changement documentation ?
+      options:
+        - ✏️ Correction (typo, erreur factuelle)
+        - ➕ Ajout (documentation manquante)
+        - 🔄 Mise à jour (information obsolète)
+        - 🎯 Clarification (améliorer la compréhension)
+        - 🌍 Traduction
+    validations:
+      required: true
+
+  - type: dropdown
+    id: location
+    attributes:
+      label: Emplacement
+      description: Quelle documentation doit être modifiée ?
+      options:
+        - README.md
+        - CLAUDE.md
+        - PATTERNS.md
+        - DTO_FLOW_GUIDE.md
+        - Code comments
+        - JSDoc / TSDoc
+        - Architecture docs
+        - API documentation
+        - Autre
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: Problème actuel
+      description: Qu'est-ce qui ne va pas avec la documentation actuelle ?
+      placeholder: "La section X n'explique pas..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Amélioration proposée
+      description: Comment devrait être la documentation ?
+      placeholder: "Il faudrait ajouter une section sur..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: Références
+      description: Liens vers code, exemples, ou autres docs pertinentes
+      placeholder: |
+        - Fichier: `core/domain/...`
+        - Exemple: https://...
+
+  - type: checkboxes
+    id: willing-to-contribute
+    attributes:
+      label: Contribution
+      description: Contribution
+      options:
+        - label: Je peux soumettre une Pull Request pour cette amélioration

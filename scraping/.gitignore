@@ -1,0 +1,11 @@
+node_modules/
+output/*.xlsx
+*.log
+.env
+.DS_Store
+playwright-report/
+test-results/
+dist/
+*.js
+*.js.map
+!playwright.config.js

@@ -1,0 +1,173 @@
+# Configuration for PR Labeler
+# Documentation: https://github.com/actions/labeler
+
+# Architecture layers
+'area: domain':
+  - changed-files:
+    - any-glob-to-any-file: 'core/domain/**/*'
+
+'area: application':
+  - changed-files:
+    - any-glob-to-any-file: 'core/application/**/*'
+
+'area: infrastructure':
+  - changed-files:
+    - any-glob-to-any-file: 'core/infrastructure/**/*'
+
+'area: presentation':
+  - changed-files:
+    - any-glob-to-any-file: 'core/presentation/**/*'
+
+# Frontend
+'area: frontend':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/app/**/*'
+      - 'src/components/**/*'
+
+'area: components':
+  - changed-files:
+    - any-glob-to-any-file: 'src/components/**/*'
+
+# Infrastructure services
+'area: supabase':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'core/infrastructure/supabase/**/*'
+      - 'supabase/**/*'
+
+'area: sanity':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'core/infrastructure/sanity/**/*'
+      - 'sanity/**/*'
+
+'area: email':
+  - changed-files:
+    - any-glob-to-any-file: 'core/infrastructure/resend/**/*'
+
+# Configuration & CI/CD
+'area: ci/cd':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/**/*'
+      - '.husky/**/*'
+
+'area: config':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'next.config.js'
+      - 'tsconfig.json'
+      - 'tailwind.config.ts'
+      - 'playwright.config.ts'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.eslintrc.json'
+      - '.prettierrc'
+
+# Documentation
+'area: documentation':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**/*'
+      - 'CLAUDE.md'
+      - 'PATTERNS.md'
+      - 'README.md'
+
+# Testing
+'area: tests':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.test.ts'
+      - '**/*.test.tsx'
+      - '**/*.spec.ts'
+      - '**/*.spec.tsx'
+      - 'tests/**/*'
+      - 'e2e/**/*'
+
+# Styles
+'area: styles':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'styles/**/*'
+      - '**/*.css'
+      - '**/*.scss'
+      - 'tailwind.config.ts'
+
+# Types of changes
+'type: feature':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'core/application/usecases/**/*'
+      - 'src/app/**/page.tsx'
+    - all-globs-to-all-files: '!**/*.test.{ts,tsx}'
+
+'type: bugfix':
+  - head-branch: ['^fix/', '^bugfix/', '^hotfix/']
+
+'type: refactor':
+  - head-branch: ['^refactor/']
+
+'type: dependencies':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+
+# Specific features
+'feature: authentication':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/auth/**/*'
+      - '**/login/**/*'
+      - '**/signin/**/*'
+      - '**/signup/**/*'
+
+'feature: teams':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*team*/**/*'
+      - '**/*Team*/**/*'
+
+'feature: matchs':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*match*/**/*'
+      - '**/*Match*/**/*'
+
+'feature: inscriptions':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*inscription*/**/*'
+      - '**/*Inscription*/**/*'
+
+'feature: blog':
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/blog/**/*'
+      - '**/actualites/**/*'
+      - 'core/infrastructure/sanity/**/*'
+
+'feature: admin':
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/app/(dashboard)/**/*'
+      - '**/admin/**/*'
+
+# Priority labels based on file count
+'size: small':
+  - changed-files:
+    - 1-5
+
+'size: medium':
+  - changed-files:
+    - 6-15
+
+'size: large':
+  - changed-files:
+    - 16-50
+
+'size: x-large':
+  - changed-files:
+    - 51-100

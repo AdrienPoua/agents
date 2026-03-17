@@ -1,0 +1,1 @@
+Bonjour, merci pour notre echange ! Comme promis voici les liens : argenteuilbasketball.com et basketclubsartrouville.fr. Dites-moi vos dispos cette semaine pour 20 min de partage d'ecran, je vous montre tout ca. Adrien - 06 51 26 13 79

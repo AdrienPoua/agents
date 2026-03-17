@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🎨 Formatage et linting du code..."
+pnpm fix
+
+echo "🔍 Vérification rapide des secrets dans les fichiers staged..."
+
+# Vérifier si des fichiers .env sont staged
+if git diff --cached --name-only | grep -E "\.env$|\.env\.local$" > /dev/null; then
+  echo "⚠️  ATTENTION: Un fichier .env est sur le point d'être commité!"
+  echo "❌ Commit bloqué pour éviter l'exposition de secrets."
+  echo "Utilisez --no-verify pour forcer (NON RECOMMANDÉ)"
+  exit 1
+fi
+
+
+echo "✅ Pré-commit validé!"

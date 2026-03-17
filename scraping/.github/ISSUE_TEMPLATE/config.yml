@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/AdrienPoua/argenteuil_basketball/discussions
+    about: Pour les questions générales, idées ou discussions sur le projet
+  - name: 🌐 Site Web
+    url: https://argenteuilbasketball.com
+    about: Visitez le site officiel d'Argenteuil Basketball

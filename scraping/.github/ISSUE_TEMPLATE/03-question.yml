@@ -1,0 +1,55 @@
+name: ❓ Question
+description: Poser une question sur le projet
+title: "[QUESTION] "
+labels: ["question"]
+assignees:
+  - AdrienPoua
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vous avez une question ? Posez-la ici !
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Catégorie
+      description: De quel domaine s'agit-il ?
+      options:
+        - 🏗️ Architecture & Code
+        - 🗄️ Supabase & Base de données
+        - 📝 Sanity CMS
+        - 🚀 Déploiement & CI/CD
+        - 🎨 UI/UX & Composants
+        - 🔐 Authentification
+        - 📧 Emails & Notifications
+        - 🤖 Scraping & Automatisation
+        - 📱 Mobile & Responsive
+        - 🔧 Configuration & Setup
+        - 💡 Autre
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Votre question
+      description: Posez votre question de manière claire
+      placeholder: "Comment puis-je..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte
+      description: Informations supplémentaires qui pourraient aider
+      placeholder: "J'essaie de... et j'ai déjà essayé..."
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code pertinent (optionnel)
+      description: Si applicable, partagez un extrait de code
+      render: typescript

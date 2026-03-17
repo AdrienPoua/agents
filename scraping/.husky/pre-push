@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔒 Exécution de l'audit de sécurité avant push..."
+
+# Vérifier les vulnérabilités critiques et high
+pnpm audit --json 2>/dev/null | node scripts/check-vulnerabilities.js
+
+if [ $? -ne 0 ]; then
+  echo "❌ Push bloqué en raison de vulnérabilités de sécurité critiques."
+  exit 1
+fi
+
+echo "✅ Audit de sécurité réussi. Poursuite du push..."

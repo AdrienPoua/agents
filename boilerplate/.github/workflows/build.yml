@@ -1,0 +1,78 @@
+name: 🏗️ Build Verification
+
+on:
+  pull_request:
+    branches: [master, main, develop]
+  push:
+    branches: [master, main]
+
+jobs:
+  build:
+    name: Next.js Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: 📥 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Setup environment variables nécessaires pour le build
+      - name: 🔐 Setup environment variables
+        run: |
+          # Créer un fichier .env.local avec des valeurs factices pour le build
+          # Ces variables ne sont pas utilisées lors du build mais Next.js les valide
+          cat > .env.local << EOF
+          NEXT_PUBLIC_SUPABASE_URL=https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY=placeholder-key
+          SUPABASE_SERVICE_ROLE_KEY=placeholder-service-key
+          NEXT_PUBLIC_SANITY_PROJECT_ID=placeholder-id
+          NEXT_PUBLIC_SANITY_DATASET=production
+          SANITY_API_TOKEN=placeholder-token
+          RESEND_API_KEY=placeholder-resend-key
+          NEXT_PUBLIC_SITE_URL=https://argenteuilbasketball.com
+          EOF
+
+      - name: 🏗️ Build Next.js app
+        run: pnpm build
+        env:
+          # Désactiver la télémétrie Next.js en CI
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: 📊 Display build size
+        run: |
+          echo "📦 Build artifacts size:"
+          du -sh .next
+
+      - name: ✅ Build succeeded
+        if: success()
+        run: echo "✅ Next.js build completed successfully!"
+
+      - name: ❌ Build failed
+        if: failure()
+        run: |
+          echo "❌ Next.js build failed!"
+          echo "Check the errors above and fix them before merging."
+          exit 1
+
+      # Cache the build for potential reuse
+      - name: 💾 Cache build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-

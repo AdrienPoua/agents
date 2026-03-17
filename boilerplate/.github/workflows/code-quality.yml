@@ -1,0 +1,49 @@
+name: 🎨 Code Quality & Linting
+
+on:
+  pull_request:
+    branches: [master, main, develop]
+  push:
+    branches: [master, main]
+
+jobs:
+  lint:
+    name: ESLint & Prettier Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: 📥 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🎨 Run ESLint
+        run: pnpm exec eslint . --max-warnings 0
+        continue-on-error: false
+
+      - name: ✨ Check Prettier formatting
+        run: pnpm exec prettier --check "**/*.{js,jsx,ts,tsx,json,css,scss,md,mdx,yml,yaml}"
+        continue-on-error: false
+
+      - name: ✅ Linting passed
+        if: success()
+        run: echo "✅ Code quality checks passed successfully!"
+
+      - name: ❌ Linting failed
+        if: failure()
+        run: |
+          echo "❌ Code quality checks failed!"
+          echo "Run 'pnpm fix' locally to auto-fix most issues."
+          exit 1

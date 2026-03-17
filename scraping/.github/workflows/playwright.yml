@@ -1,0 +1,82 @@
+name: Tests
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch: # Permet le déclenchement manuel depuis l'interface GitHub
+jobs:
+  jest:
+    name: Jest Unit Tests
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+      - name: Run Jest tests
+        run: pnpm run test
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-coverage
+          path: coverage/
+          retention-days: 30
+
+  playwright:
+    name: Playwright E2E Tests
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    env:
+      # GitHub Secrets - warnings are normal, secrets are encrypted
+      # Supabase Configuration
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+      # Sanity Configuration
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+      NEXT_PUBLIC_SANITY_API_VERSION: '2024-06-20'
+      SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+
+      # Email Configuration (Resend) - Optional for tests
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
+      # FFBB Extranet Configuration - Optional for tests
+      FFBB_SERVER_USERNAME: ${{ secrets.FFBB_SERVER_USERNAME }}
+      FFBB_SERVER_PASSWORD: ${{ secrets.FFBB_SERVER_PASSWORD }}
+      EXTRANET_USERNAME: ${{ secrets.EXTRANET_USERNAME }}
+      EXTRANET_PASSWORD: ${{ secrets.EXTRANET_PASSWORD }}
+
+      # Vercel Environment
+      VERCEL_ENV: 'test'
+
+      # Test Credentials for E2E tests
+      TEST_ADMIN_EMAIL: ${{ secrets.TEST_ADMIN_EMAIL }}
+      TEST_ADMIN_PASSWORD: ${{ secrets.TEST_ADMIN_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+      - name: Build the project
+        run: pnpm build
+      - name: Start the project
+        # Lance en arrière-plan avec &
+        run: pnpm start &
+      - name: Run Playwright tests
+        run: pnpm exec playwright test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

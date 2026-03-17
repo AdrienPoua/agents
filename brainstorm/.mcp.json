@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "notion": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_TOKEN": "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"
+      }
+    }
+  }
+}

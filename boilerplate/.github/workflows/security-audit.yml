@@ -1,0 +1,139 @@
+name: Security Audit
+
+on:
+  # Exécuter tous les lundis à 9h
+  schedule:
+    - cron: '0 9 * * 1'
+
+  # Exécuter sur chaque push vers main
+  push:
+    branches:
+      - main
+      - master
+
+  # Exécuter sur les pull requests
+  pull_request:
+    branches:
+      - main
+      - master
+
+  # Permettre l'exécution manuelle
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    name: Audit de Sécurité npm
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Configuration de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installation de pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Installation des dépendances
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit de sécurité (Level Critical)
+        run: pnpm audit --audit-level=critical
+        continue-on-error: true
+        id: audit-critical
+
+      - name: Audit de sécurité (Level High)
+        run: pnpm audit --audit-level=high
+        continue-on-error: true
+        id: audit-high
+
+      - name: Génération du rapport complet
+        run: |
+          pnpm audit --json > security-audit-report.json
+          pnpm audit > security-audit-report.txt
+        continue-on-error: true
+
+      - name: Analyse du rapport avec script custom
+        run: pnpm run security:check
+        continue-on-error: true
+
+      - name: Upload du rapport en artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-audit-report
+          path: |
+            security-audit-report.json
+            security-audit-report.txt
+          retention-days: 90
+
+      - name: Commentaire sur PR (si applicable)
+        if: github.event_name == 'pull_request' && (steps.audit-critical.outcome == 'failure' || steps.audit-high.outcome == 'failure')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('security-audit-report.txt', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🔒 Rapport d'Audit de Sécurité\n\n⚠️ Des vulnérabilités critiques ou high ont été détectées.\n\n<details>\n<summary>Voir le rapport complet</summary>\n\n\`\`\`\n${report}\n\`\`\`\n\n</details>\n\nMerci de corriger ces vulnérabilités avant de merger cette PR.`
+            });
+
+      - name: Échec si vulnérabilités critiques
+        if: steps.audit-critical.outcome == 'failure'
+        run: |
+          echo "❌ Des vulnérabilités CRITICAL ont été détectées!"
+          echo "Consultez le rapport pour plus de détails."
+          exit 1
+
+  dependency-review:
+    name: Revue des Dépendances
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          deny-licenses: GPL-2.0, GPL-3.0
+
+  codeql-analysis:
+    name: Analyse CodeQL
+    runs-on: ubuntu-latest
+    if: false # Désactivé - CodeQL n'est pas activé sur ce repository
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript', 'typescript']
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Initialisation de CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Analyse CodeQL
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{ matrix.language }}'

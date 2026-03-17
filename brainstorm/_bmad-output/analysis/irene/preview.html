@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YETI.live — Design Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS VARIABLES — Design System Tokens
+       ======================================== */
+    :root {
+      /* Backgrounds */
+      --bg-primary: #09090B;
+      --bg-surface: #131316;
+      --bg-elevated: #1C1C21;
+
+      /* Borders */
+      --border-subtle: #1F1F26;
+      --border-default: #2A2A33;
+
+      /* Text */
+      --text-primary: #EDEDF0;
+      --text-secondary: #8B8B96;
+      --text-muted: #5A5A66;
+
+      /* Accents — Dualite corps/esprit */
+      --accent-warm: #D4885A;
+      --accent-warm-soft: rgba(212, 136, 90, 0.12);
+      --accent-cool: #5AB8D4;
+      --accent-cool-soft: rgba(90, 184, 212, 0.10);
+
+      /* Spacing */
+      --space-section: 140px;
+      --space-block: 72px;
+      --space-element: 28px;
+      --space-tight: 12px;
+
+      /* Fonts */
+      --font-display: 'Inter', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Subtle noise texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    ::selection {
+      background: rgba(212, 136, 90, 0.3);
+      color: var(--text-primary);
+    }
+
+    /* ========================================
+       NAVIGATION — Pill Nav (like portfolio)
+       ======================================== */
+    nav {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      background: rgba(19, 19, 22, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+    }
+
+    nav a {
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 0.01em;
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+    }
+
+    nav a.active {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+
+    /* ========================================
+       SECTION BASE
+       ======================================== */
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 48px;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ========================================
+       TYPOGRAPHY PATTERNS
+       ======================================== */
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: var(--space-tight);
+    }
+
+    .label-cool {
+      color: var(--accent-cool);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 5.5vw, 68px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-element);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3.5vw, 46px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: var(--space-element);
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    p.lead {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 560px;
+    }
+
+    p.body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 520px;
+    }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      text-align: center;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero p.lead {
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    /* Hero glow — pulsating body-mind */
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: 700px;
+      height: 700px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-glow .warm {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      top: 50%;
+      left: 35%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(212, 136, 90, 0.12) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: pulse-warm 10s ease-in-out infinite;
+    }
+
+    .hero-glow .cool {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      top: 45%;
+      left: 65%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(90, 184, 212, 0.09) 0%, transparent 70%);
+      filter: blur(90px);
+      animation: pulse-cool 12s ease-in-out infinite;
+    }
+
+    @keyframes pulse-warm {
+      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    @keyframes pulse-cool {
+      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.12); }
+    }
+
+    /* ECG line animation */
+    .ecg-line {
+      position: absolute;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 80px;
+      opacity: 0.12;
+      z-index: 1;
+    }
+
+    .ecg-line svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .ecg-path {
+      stroke: url(#ecg-gradient);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: draw-ecg 4s ease-in-out forwards, draw-ecg-loop 6s ease-in-out 4s infinite;
+    }
+
+    @keyframes draw-ecg {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes draw-ecg-loop {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Logo / Brand */
+    .brand {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .brand .dot-live {
+      background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ========================================
+       BUTTONS
+       ======================================== */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
+      color: var(--bg-primary);
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
+      filter: blur(16px);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:hover::before {
+      opacity: 0.4;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 32px;
+      background: transparent;
+      color: var(--accent-warm);
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      border: 1px solid rgba(212, 136, 90, 0.35);
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-warm);
+      background: var(--accent-warm-soft);
+      transform: translateY(-2px);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* ========================================
+       SECTION DIVIDER
+       ======================================== */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-default), transparent);
+      border: none;
+    }
+
+    .divider-accent {
+      background: linear-gradient(90deg, transparent, rgba(212, 136, 90, 0.2), rgba(90, 184, 212, 0.2), transparent);
+    }
+
+    /* ========================================
+       PROBLEM SECTION — Quadrant
+       ======================================== */
+    .problem {
+      background: var(--bg-primary);
+    }
+
+    .problem .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .problem h2 {
+      max-width: 700px;
+    }
+
+    .problem p.lead {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    /* Quadrant chart */
+    .quadrant {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      aspect-ratio: 1.35 / 1;
+      margin: 0 auto;
+    }
+
+    .quadrant-axis-v {
+      position: absolute;
+      left: 50%;
+      top: 8%;
+      bottom: 8%;
+      width: 1px;
+      background: linear-gradient(180deg, var(--border-default), var(--border-subtle));
+    }
+
+    .quadrant-axis-h {
+      position: absolute;
+      top: 50%;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-subtle), var(--border-default), var(--border-subtle));
+    }
+
+    .quadrant-label {
+      position: absolute;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .quadrant-label.top { top: 0; left: 50%; transform: translateX(-50%); color: var(--accent-cool); opacity: 0.7; }
+    .quadrant-label.bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .quadrant-label.left { left: 2%; top: 50%; transform: translateY(-50%); }
+    .quadrant-label.right { right: 2%; top: 50%; transform: translateY(-50%); }
+
+    .dot {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translate(-50%, -50%);
+    }
+
+    .dot-circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .dot-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .dot.yeti .dot-circle {
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(212, 136, 90, 0.3), 0 0 40px rgba(90, 184, 212, 0.15);
+      animation: yeti-pulse 3s ease-in-out infinite;
+    }
+
+    .dot.yeti .dot-name {
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    @keyframes yeti-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 136, 90, 0.3), 0 0 40px rgba(90, 184, 212, 0.15); }
+      50% { box-shadow: 0 0 30px rgba(212, 136, 90, 0.5), 0 0 60px rgba(90, 184, 212, 0.25); }
+    }
+
+    .quadrant-empty-zone {
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      width: 38%;
+      height: 38%;
+      border: 1px dashed rgba(90, 184, 212, 0.15);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quadrant-empty-zone span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-cool);
+      opacity: 0.35;
+    }
+
+    /* ========================================
+       SCIENCE SECTION — Metric Cards
+       ======================================== */
+    .science {
+      background: var(--bg-primary);
+    }
+
+    .science .container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .science-header {
+      margin-bottom: 64px;
+      max-width: 560px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .metric-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 36px 32px;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .metric-card:hover {
+      border-color: var(--border-default);
+      transform: translateY(-4px);
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: clamp(32px, 3vw, 44px);
+      font-weight: 500;
+      color: var(--accent-cool);
+      line-height: 1;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .metric-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .metric-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .metric-card.warm .metric-value {
+      color: var(--accent-warm);
+    }
+
+    /* Science detail row */
+    .science-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 72px;
+      align-items: center;
+    }
+
+    .science-detail .detail-text p {
+      margin-bottom: 20px;
+    }
+
+    /* Validation bar */
+    .validation-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .validation-item:last-child {
+      border-bottom: none;
+    }
+
+    .validation-score {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent-cool);
+      min-width: 80px;
+    }
+
+    .validation-name {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .validation-bar-container {
+      flex: 1;
+      height: 4px;
+      background: var(--bg-elevated);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .validation-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cool), var(--accent-warm));
+      border-radius: 2px;
+      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ========================================
+       TAGS
+       ======================================== */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .tag-warm {
+      background: var(--accent-warm-soft);
+      border-color: rgba(212, 136, 90, 0.2);
+      color: var(--accent-warm);
+    }
+
+    .tag-cool {
+      background: var(--accent-cool-soft);
+      border-color: rgba(90, 184, 212, 0.2);
+      color: var(--accent-cool);
+    }
+
+    /* ========================================
+       SCROLL REVEAL ANIMATIONS
+       ======================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 768px) {
+      section {
+        padding: 80px 24px;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .science-detail {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        top: 12px;
+        gap: 2px;
+        padding: 3px;
+      }
+
+      nav a {
+        padding: 6px 14px;
+        font-size: 13px;
+      }
+
+      .btn-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .quadrant {
+        aspect-ratio: 1 / 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav>
+    <a href="#hero" class="active">Accueil</a>
+    <a href="#problem">Le Constat</a>
+    <a href="#science">La Science</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+
+  <!-- ============================================
+       SECTION 1 — HERO
+       ============================================ -->
+  <section class="hero" id="hero">
+
+    <!-- Dual glow -->
+    <div class="hero-glow">
+      <div class="warm"></div>
+      <div class="cool"></div>
+    </div>
+
+    <!-- ECG line -->
+    <div class="ecg-line">
+      <svg viewBox="0 0 600 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="ecg-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#D4885A" />
+            <stop offset="100%" stop-color="#5AB8D4" />
+          </linearGradient>
+        </defs>
+        <path class="ecg-path" d="M0,40 L80,40 L100,40 L120,40 L140,40 L160,38 L180,42 L200,40 L220,40 L240,40 L260,40 L270,35 L275,20 L280,65 L285,10 L290,55 L295,30 L300,40 L310,40 L340,40 L360,40 L380,38 L400,42 L420,40 L440,40 L460,40 L470,35 L475,22 L480,60 L485,12 L490,52 L495,32 L500,40 L520,40 L560,40 L600,40" />
+      </svg>
+    </div>
+
+    <div class="container">
+      <p class="label reveal">YETI<span style="background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">.live</span></p>
+      <h1 class="reveal reveal-delay-1">Le seul wearable<br>qui mesure le lien<br><span style="background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">corps–esprit</span></h1>
+      <p class="lead reveal reveal-delay-2">Un capteur thoracique unique. 20 ans de R&D. L'analyse en temps reel de votre signature physique, physiologique et somatopsychique.</p>
+      <div class="btn-group reveal reveal-delay-3">
+        <a href="#contact" class="btn-primary">Devenir partenaire <span>→</span></a>
+        <a href="#science" class="btn-secondary">Decouvrir la science</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider divider-accent">
+
+
+  <!-- ============================================
+       SECTION 2 — LE PROBLÈME / QUADRANT
+       ============================================ -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <p class="label reveal">Le constat</p>
+      <h2 class="reveal reveal-delay-1">Tous mesurent le physique.<br>Personne ne mesure l'esprit.</h2>
+      <p class="lead reveal reveal-delay-2">Catapult, WHOOP, Oura, Polar — 17 acteurs analyses. Aucun ne combine biometrie physique et dimension somatopsychique. Le quadrant Body-Mind est entierement vacant.</p>
+
+      <div class="quadrant reveal reveal-delay-3">
+        <!-- Axes -->
+        <div class="quadrant-axis-v"></div>
+        <div class="quadrant-axis-h"></div>
+
+        <!-- Labels -->
+        <span class="quadrant-label top">Psychophysiologique</span>
+        <span class="quadrant-label bottom">Physique seul</span>
+        <span class="quadrant-label left">Consumer</span>
+        <span class="quadrant-label right">Pro / B2B</span>
+
+        <!-- Empty zone -->
+        <div class="quadrant-empty-zone">
+          <span>Quadrant vacant</span>
+        </div>
+
+        <!-- Dots — Bottom-left (Consumer + Physique) -->
+        <div class="dot" style="left: 20%; top: 68%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Apple</span>
+        </div>
+        <div class="dot" style="left: 30%; top: 75%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Samsung</span>
+        </div>
+        <div class="dot" style="left: 15%; top: 78%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Xiaomi</span>
+        </div>
+
+        <!-- Dots — Bottom-right (Pro + Physique) -->
+        <div class="dot" style="left: 72%; top: 72%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Catapult</span>
+        </div>
+        <div class="dot" style="left: 82%; top: 68%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Kinexon</span>
+        </div>
+        <div class="dot" style="left: 78%; top: 78%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">STATSports</span>
+        </div>
+
+        <!-- Dots — Top-left area (Consumer + some psycho) -->
+        <div class="dot" style="left: 28%; top: 40%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">WHOOP</span>
+        </div>
+        <div class="dot" style="left: 22%; top: 44%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Oura</span>
+        </div>
+        <div class="dot" style="left: 35%; top: 46%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Garmin</span>
+        </div>
+        <div class="dot" style="left: 15%; top: 36%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">Lief</span>
+        </div>
+
+        <!-- YETI.live — Top-right (Pro + Psychophysio) -->
+        <div class="dot yeti" style="left: 75%; top: 24%;">
+          <div class="dot-circle"></div>
+          <span class="dot-name">YETI.live</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ============================================
+       SECTION 3 — LA SCIENCE
+       ============================================ -->
+  <section class="science" id="science">
+    <div class="container">
+
+      <div class="science-header">
+        <p class="label label-cool reveal">La science</p>
+        <h2 class="reveal reveal-delay-1">20 ans de recherche.<br>13 000 sequences.<br>Une empreinte unique.</h2>
+        <p class="body reveal reveal-delay-2">Chaque individu produit une forme caracteristique du mouvement — une signature personnelle. Notre base de donnees couvre 35 individus, 26 activites, et des milliers de patterns valides scientifiquement.</p>
+      </div>
+
+      <!-- Metrics grid -->
+      <div class="metrics-grid">
+        <div class="metric-card reveal reveal-delay-1">
+          <div class="metric-value">13K</div>
+          <div class="metric-label">Sequences analysees</div>
+          <div class="metric-desc">Base de donnees de 20 secondes chacune, couvrant repos, exercice et post-exercice</div>
+        </div>
+        <div class="metric-card reveal reveal-delay-2">
+          <div class="metric-value">r=0.98</div>
+          <div class="metric-label">Correlation ECG</div>
+          <div class="metric-desc">Precision classe Polar H10 — gold standard du marche — validee vs ECG clinique 12 derivations</div>
+        </div>
+        <div class="metric-card reveal reveal-delay-3">
+          <div class="metric-value">92–95%</div>
+          <div class="metric-label">Detection emotionnelle</div>
+          <div class="metric-desc">Accuracy de reconnaissance d'etat emotionnel via ECG monocanal en deep learning</div>
+        </div>
+        <div class="metric-card warm reveal reveal-delay-4">
+          <div class="metric-value">98.6%</div>
+          <div class="metric-label">Classification workload</div>
+          <div class="metric-desc">Precision de classification de la charge physique via machine learning temps reel</div>
+        </div>
+        <div class="metric-card reveal reveal-delay-4">
+          <div class="metric-value">26</div>
+          <div class="metric-label">Activites couvertes</div>
+          <div class="metric-desc">De la marche au sprint, du repos a l'effort maximal — chaque activite produit une signature unique</div>
+        </div>
+        <div class="metric-card warm reveal reveal-delay-5">
+          <div class="metric-value">1</div>
+          <div class="metric-label">Capteur unique</div>
+          <div class="metric-desc">ECG + accelerometre + respiration — un seul dispositif thoracique remplace les systemes multi-capteurs</div>
+        </div>
+      </div>
+
+      <!-- Validation scientifique -->
+      <div class="science-detail reveal" style="margin-top: 80px;">
+        <div class="detail-text">
+          <h3>Validation scientifique</h3>
+          <p class="body">Notre approche est adossee a la litterature peer-reviewed. La fusion ECG + accelerometre thoracique est validee par les etudes Movesense (MDPI Sensors), EmoWear (Nature 2024), et les avancees en Health-LLMs.</p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+            <span class="tag tag-cool">ECG monocanal</span>
+            <span class="tag tag-cool">IMU 9-axes</span>
+            <span class="tag tag-warm">Somatopsychique</span>
+            <span class="tag">Edge AI</span>
+            <span class="tag">Signature individuelle</span>
+          </div>
+        </div>
+        <div class="detail-bars">
+          <div class="validation-item">
+            <span class="validation-score">r = 1.0</span>
+            <span class="validation-name">meanRR</span>
+            <div class="validation-bar-container"><div class="validation-bar" data-width="100%" style="width: 0%"></div></div>
+          </div>
+          <div class="validation-item">
+            <span class="validation-score">r = 0.98</span>
+            <span class="validation-name">SDNN</span>
+            <div class="validation-bar-container"><div class="validation-bar" data-width="98%" style="width: 0%"></div></div>
+          </div>
+          <div class="validation-item">
+            <span class="validation-score">r = 0.98</span>
+            <span class="validation-name">RMSSD</span>
+            <div class="validation-bar-container"><div class="validation-bar" data-width="98%" style="width: 0%"></div></div>
+          </div>
+          <div class="validation-item">
+            <span class="validation-score">r = 0.96</span>
+            <span class="validation-name">DFAa1</span>
+            <div class="validation-bar-container"><div class="validation-bar" data-width="96%" style="width: 0%"></div></div>
+          </div>
+          <div class="validation-item">
+            <span class="validation-score">92-95%</span>
+            <span class="validation-name">Emotion ECG</span>
+            <div class="validation-bar-container"><div class="validation-bar" data-width="93%" style="width: 0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       JAVASCRIPT — Scroll reveal + bar animation
+       ============================================ -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Animate validation bars when science section enters
+          const bars = entry.target.querySelectorAll('.validation-bar');
+          bars.forEach((bar, i) => {
+            setTimeout(() => {
+              bar.style.width = bar.dataset.width;
+            }, 200 + i * 150);
+          });
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Active nav pill on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          const id = entry.target.getAttribute('id');
+          const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+          if (activeLink) activeLink.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => navObserver.observe(s));
+  </script>
+
+</body>
+</html>

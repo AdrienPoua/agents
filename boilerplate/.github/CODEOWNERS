@@ -1,0 +1,53 @@
+# CODEOWNERS for Argenteuil Basketball
+# Documentation: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+* @AdrienPoua
+
+# Core Architecture
+/core/ @AdrienPoua
+/core/domain/ @AdrienPoua
+/core/application/ @AdrienPoua
+/core/infrastructure/ @AdrienPoua
+/core/presentation/ @AdrienPoua
+
+# Supabase & Database
+/core/infrastructure/supabase/ @AdrienPoua
+/supabase/ @AdrienPoua
+
+# Sanity CMS
+/core/infrastructure/sanity/ @AdrienPoua
+/sanity/ @AdrienPoua
+
+# Email
+/core/infrastructure/resend/ @AdrienPoua
+
+# Next.js App
+/src/ @AdrienPoua
+/src/app/ @AdrienPoua
+/src/components/ @AdrienPoua
+
+# Configuration Files
+/.github/ @AdrienPoua
+/next.config.js @AdrienPoua
+/tsconfig.json @AdrienPoua
+/package.json @AdrienPoua
+/pnpm-lock.yaml @AdrienPoua
+
+# Documentation
+/README.md @AdrienPoua
+/CLAUDE.md @AdrienPoua
+/PATTERNS.md @AdrienPoua
+/docs/ @AdrienPoua
+
+# CI/CD & Testing
+/.github/workflows/ @AdrienPoua
+/playwright.config.ts @AdrienPoua
+/.husky/ @AdrienPoua
+
+# Styles
+/styles/ @AdrienPoua
+/tailwind.config.ts @AdrienPoua
+
+# Environment & Secrets
+/.env.example @AdrienPoua
