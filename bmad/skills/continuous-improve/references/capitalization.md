@@ -45,6 +45,14 @@ A generic lesson must reach the skill's *source*, not the running copy — editi
 
 3. **Otherwise** (global install, no source repo, not in the project) — do not lose the lesson. Append it to `{project-root}/.continuous-improve/lessons.md` (committed in the project work branch), tagged `generic — port to skill source`, so it surfaces for manual porting later.
 
+## Periodic meta-reflection — self-diagnose the method
+
+Per-run capitalization catches *local* lessons; it misses *systemic* ones — a single run never notices "the last 11 runs were all tests." So periodically step back. On a productive run, when the run history (in the backlog) is worth examining — roughly every ~5 productive runs, or sooner if the last 3+ runs share a theme, the review gate keeps flagging the same class of issue, or the same friction recurs — ask one question:
+
+> Looking across recent runs, is there a pattern suggesting **the skill's own method** should change? — a recurring bias in what gets picked, a step that repeatedly wastes effort, a missing default, a rule that keeps getting worked around.
+
+If yes, that is a **generic lesson** → route it through Destination B (a self-improve PR to `{workflow.skill_source_repo}`), atomic, for human review, never a rewrite. If no clear pattern, note that the reflection ran and move on. This is the beat that lets the loop improve *how it works*, not just the repo it works on.
+
 ## Safety (all destinations)
 
 - One atomic lesson per destination per run — an addition, an edit, or the deletion of a now-obsolete line. Never a rewrite.
