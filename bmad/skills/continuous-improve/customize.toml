@@ -1,0 +1,42 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for continuous-improve.
+# Team overrides:     {project-root}/_bmad/custom/continuous-improve.toml
+# Personal overrides: {project-root}/_bmad/custom/continuous-improve.user.toml
+#
+# Merge: scalars override (last layer wins), arrays append. No removal mechanism.
+
+[workflow]
+
+# --- Universal defaults ---
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = ["file:{project-root}/**/project-context.md"]
+on_complete = ""
+
+# --- Per-project pins (scalars; empty = auto-detect at runtime) ---
+
+# Dedicated improvement branch the bot owns and force-pushes. Never the base branch.
+work_branch = "improve/auto"
+
+# Production branch the rolling PR targets. Empty = auto-detect the remote default (main/master).
+base_branch = ""
+
+# Where the cross-run backlog/ledger lives (git-committed).
+backlog_path = "{project-root}/.continuous-improve/log.md"
+
+# Command that proves the change is sound. Empty = infer from the repo
+# (package.json scripts, Makefile, pyproject, cargo, go.mod, CI). Pin it to skip inference.
+verify_command = ""
+
+# Where GENERIC, reusable lessons about the skill itself are routed (self-improvement).
+# A git remote you can open PRs against, e.g. the marketplace/source repo that ships this
+# skill: "AdrienPoua/claude-marketplace" or a full URL. The run clones it, edits the skill,
+# and maintains a rolling "self-improve" PR you review — never auto-merged.
+# Empty = no source-repo channel; generic lessons degrade per references/capitalization.md.
+# (Project-specific lessons NEVER go here — they go to the project's own CLAUDE.md.)
+skill_source_repo = "https://github.com/AdrienPoua/claude-marketplace.git"
+
+# --- Standards applied at the review gate. Append-only; base entries cannot be removed. ---
+# Extra review lenses run in addition to the built-in adversarial gate, e.g. "skill:bmad-code-review".
+finalize_reviewers = []
